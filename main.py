@@ -30,11 +30,12 @@ def main():
     asteroids = pygame.sprite.Group()
     
     
-
+    AsteroidField.containers = (updateable)
     Asteroid.containers = (asteroids, updateable, drawable)
     Player.containers = (updateable, drawable)
     player = Player(player_start_x, player_start_y)
-    
+    field = AsteroidField()
+
     # game loop
     game_running = True
     while game_running:
