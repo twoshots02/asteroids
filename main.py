@@ -6,6 +6,7 @@ from constants import *
 from player import *
 from asteroidfield import *
 from asteroids import *
+from shot import *
 
 
 def main():
@@ -28,16 +29,19 @@ def main():
     updateable = pygame.sprite.Group()
     drawable = pygame.sprite.Group()
     asteroids = pygame.sprite.Group()
+    shots = pygame.sprite.Group()
     
     
-    AsteroidField.containers = (updateable)
-    Asteroid.containers = (asteroids, updateable, drawable)
-    Player.containers = (updateable, drawable)
+    AsteroidField.containers = updateable
+    Asteroid.containers = asteroids, updateable, drawable
+    Player.containers = updateable, drawable
+    Shot.containers = shots, updateable, drawable
     player = Player(player_start_x, player_start_y)
     field = AsteroidField()
 
     # game loop
     game_running = True
+    counter = 0
     while game_running:
         # allows for the close button on the window to quit the program
         for event in pygame.event.get():
@@ -48,6 +52,7 @@ def main():
 
         # update all sprites
         for thing in updateable:
+            
             thing.update(dt)
 
         # check for collisions
@@ -64,6 +69,7 @@ def main():
         
         # refresh the screen
         pygame.display.flip()
+       
     # end game loop
 
 if __name__ == "__main__":
