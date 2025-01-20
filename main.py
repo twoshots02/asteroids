@@ -60,6 +60,9 @@ def main():
             if player.check_collision(asteroid):
                 print("Game over!")
                 game_running = False 
+            if pygame.sprite.spritecollide(asteroid, shots, True):
+                asteroid.split()
+                print("Asteroid hit!")
         # clear the screen
         screen.fill("black")
        

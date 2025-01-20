@@ -30,5 +30,21 @@ class Asteroid(CircleShape):
             if self.position.distance_to(other.position) < self.radius + other.radius:
                 return True
         return False
+    
+    def split(self):
+        if self.radius <= ASTEROID_MIN_RADIUS:
+            self.kill()
+            return
+        for _ in range(2):
+            asteroid = Asteroid(self.position.x, self.position.y, self.radius // 2)
+            asteroid.velocity = self.velocity.rotate(random.randint(-40, 40))
+            asteroid.rotation_speed = random.uniform(-ASTEROID_ROTATION_SPEED, ASTEROID_ROTATION_SPEED)
+            asteroid.image = pygame.Surface((asteroid.radius * 2, asteroid.radius * 2))
+            asteroid.image.set_colorkey("black")
+            asteroid.rect = asteroid.image.get_rect()
+            asteroid.rect.center = (asteroid.position.x, asteroid.position.y)
+
+        self.kill()
+
 
 
