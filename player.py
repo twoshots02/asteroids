@@ -40,3 +40,9 @@ class Player(pygame.sprite.Sprite):
         self.velocity = pygame.Vector2(0, 1).rotate(self.rotation) * PLAYER_SPEED
         
         self.position += self.velocity * dt * direction
+ 
+    def check_collision(self, other):
+        
+        if self.position.distance_to(other.position) < self.radius + other.radius:
+            return True
+        return False
